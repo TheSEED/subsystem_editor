@@ -1,0 +1,170 @@
+body {
+   font-family: Verdana, Arial, sans-serif;
+   font-size: 12px;
+   font-weight: normal;
+   color: #000;
+   background-color: #FFFFFF;
+   margin: 0px;
+}
+
+/********************************************************/
+/*  HEADER                                              */
+/********************************************************/
+
+#header {
+    padding: 5px 10px 5px 10px;
+    margin: 0px;
+    background: #466d94 url(./bg-header.png);
+    background-repeat: repeat-x;
+    color: #eee;
+}
+
+#header a:link, #header a:visited {
+    color: #eee;
+    font-weight: normal;
+    text-decoration: underline;
+}
+
+#header a:hover, #header a:focus {
+    color: #333;
+    font-weight: normal;
+    text-decoration: underline;
+}
+
+
+#logo {
+    float: left;
+    margin: 0px 20px 0px 10px;
+}
+
+#title {
+    font-size: 17pt;
+    font-weight: bold;
+}
+
+#version {
+    color: #000;
+    font-size: 10px;
+    width: 120px;
+}
+
+/********************************************************/
+/*  MENU                                                */
+/********************************************************/
+
+div#menu {
+    font-size: 12px;
+    height: 25px;
+    display: block;
+    background-color: #86d392;
+    margin-bottom: 20px;
+    border-top: 2px solid #5da668;
+    border-bottom: 2px solid #5da668;
+}
+
+#menu img.imglink {
+    padding-top: 3px;
+    border: none;
+}
+
+#menu a.imglink {
+    padding-left: 10px;
+    float: left;
+    display: inline;
+}
+
+#menu ul {
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+}
+
+#menu li {
+    position: relative;
+    float: left;
+    font-size: 12px;
+    cursor: default;
+    background-color: #86d392;
+    border-right: 1px solid #5da668;
+    padding: 5px 10px 5px 10px;
+}
+
+#menu li:hover {
+    background-color: #5da668;
+}
+
+#menu #nav a {
+    color: #000;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+#menu #nav li li a {
+    display: block;
+    font-weight: normal;
+    color: #000;
+    padding: 3px 5px 3px 5px;
+}
+
+#menu #nav li li a:hover {
+    padding: 3px 5px 3px 5px;
+    color: #fff; 
+    background: #5da668;
+}
+
+
+#menu li ul {
+    display: none;
+    z-index: 5;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    font-weight: normal;
+    border-left: 1px solid #5da668;
+    border-right: 1px solid #5da668;
+    border-bottom: 1px solid #5da668;
+    border-top: 2px solid #5da668;
+    margin-top: 5px;
+    padding: 0px 0px 0px 0px;
+}
+
+#menu li li {
+    display: block;
+    float: none;
+    padding: 0px;
+    background-color: #d5f3c6;
+    border: 0px;
+    width: 160px;
+}
+
+#menu li>ul {
+    top: auto;
+    left: auto;
+}
+
+#menu li:hover ul, li.over ul {
+    display: block;
+}
+
+div#location {
+    float: right;
+    font-size: 10px;
+    color: #000;
+    padding: 6px 10px 6px 10px;
+}
+
+#location img {
+    margin-top: -3px;
+}
+
+#location a:link, #location a:visited {
+    color: #000;
+    font-weight: normal;
+    text-decoration: none;
+}
+
+#location a:hover, #location a:focus {
+    color: #000;
+    font-weight: normal;
+    text-decoration: underline;
+}
