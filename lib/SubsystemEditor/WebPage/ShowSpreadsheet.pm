@@ -479,7 +479,7 @@ sub load_subsystem_spreadsheet {
   my $emptycellshover = $self->application->component( 'EmptyCells' );
 
   # initialize roles, subsets and spreadsheet
-  my ( $roles, $subsets, $collections, $spreadsheet_hash, $pegsarr, $peg_functions ) = $self->get_subsystem_data( $subsystem, $subsystem_name, $emptycellshover, $self->{ 'cgi' }->param( 'SHOWEMPTYCELLS' ) );
+  my ( $roles, $subsets, $collections, $spreadsheet_hash, $pegsarr, $peg_functions ) = $self->get_subsystem_data( $subsystem, $subsystem_name, $emptycellshover, $self->{ 'cgi' }->multi_param( 'SHOWEMPTYCELLS' ) );
 
   # Displaying and Collapsing Subsets
   my @collection_set = ( 'All' );
