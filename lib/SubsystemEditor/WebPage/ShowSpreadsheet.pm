@@ -131,7 +131,7 @@ sub output {
   #########
 
   if ( defined( $self->{ 'cgi' }->param( 'buttonpressed' ) ) && $self->{ 'cgi' }->param( 'buttonpressed' ) eq 'Add selected genome(s) to spreadsheet' ) {
-    my @newGenomes = $self->{ 'cgi' }->param( 'new_genome' );
+    my @newGenomes = $self->{ 'cgi' }->multi_param( 'new_genome' );
     my $specialsetlist = $self->{ 'cgi' }->param( 'add_special_set' );
     my $usersetlist = $self->{ 'cgi' }->param( 'add_user_set' );
     my $ghash = {};
@@ -155,7 +155,7 @@ sub output {
     $comment .= $putcomment;
   }
   if ( defined( $self->{ 'cgi' }->param( 'buttonpressed' ) ) && $self->{ 'cgi' }->param( 'buttonpressed' ) eq 'Add selected region' ) {
-    my @garray = $self->{ 'cgi' }->param( 'new_region' );
+    my @garray = $self->{ 'cgi' }->multi_param( 'new_region' );
     if ( !defined( $garray[0] ) ) {
       $error .= "You have not selected a genome for your region!<BR>\n";
     }
@@ -256,7 +256,7 @@ sub output {
     }
   }
   elsif ( defined( $self->{ 'cgi' }->param( 'buttonpressed' ) ) && $self->{ 'cgi' }->param( 'buttonpressed' ) eq 'RefillSelectionButton' ) {
-    my @newGenomes = $self->{ 'cgi' }->param( 'genome_checkbox' );
+    my @newGenomes = $self->{ 'cgi' }->multi_param( 'genome_checkbox' );
     
     # take only the fig-tax id from the genome label #
     @newGenomes = map { $_ =~ /^genome_checkbox_(\d+\.\d+)/; $1 } @newGenomes;
@@ -266,7 +266,7 @@ sub output {
     $comment .= $putcomment;
   }
   elsif ( defined( $self->{ 'cgi' }->param( 'buttonpressed' ) ) && $self->{ 'cgi' }->param( 'buttonpressed' ) eq 'FillSelectionButton' ) {
-    my @newGenomes = $self->{ 'cgi' }->param( 'genome_checkbox' );
+    my @newGenomes = $self->{ 'cgi' }->multi_param( 'genome_checkbox' );
     
     # take only the fig-tax id from the genome label #
     @newGenomes = map { $_ =~ /^genome_checkbox_(\d+\.\d+)/; $1 } @newGenomes;
@@ -287,7 +287,7 @@ sub output {
     $comment .= $putcomment;
   }
   elsif ( defined( $self->{ 'cgi' }->param( 'buttonpressed' ) ) && $self->{ 'cgi' }->param( 'buttonpressed' ) eq 'DeleteGenomes' ) {
-    my @genomesIds = $self->{ 'cgi' }->param( 'genome_checkbox' );
+    my @genomesIds = $self->{ 'cgi' }->multi_param( 'genome_checkbox' );
     my ( $putcomment ) = $self->remove_genomes( $subsystem, \@genomesIds );
     $comment .= $putcomment;
   }
@@ -295,7 +295,7 @@ sub output {
     my ( $puterror, $putcomment ) = $self->save_variant_codes( $subsystem );
   }
   elsif ( defined( $self->{ 'cgi' }->param( 'buttonpressed' ) ) && $self->{ 'cgi' }->param( 'buttonpressed' ) eq 'ShowOnlyButton' ) {
-    my @selGenomes = $self->{ 'cgi' }->param( 'genome_checkbox' );
+    my @selGenomes = $self->{ 'cgi' }->multi_param( 'genome_checkbox' );
     my %sG;
     foreach my $genm ( @selGenomes ) {
       $genm =~ /^genome_checkbox_(\d+\.\d+)/;
@@ -307,13 +307,13 @@ sub output {
     $activeSubsetHash = \%sG;
   }
   elsif ( defined( $self->{ 'cgi' }->param( 'buttonpressed' ) ) && $self->{ 'cgi' }->param( 'buttonpressed' ) eq 'ColorSimsButton' ) {
-    my @selGenomes = $self->{ 'cgi' }->param( 'genome_checkbox' );
+    my @selGenomes = $self->{ 'cgi' }->multi_param( 'genome_checkbox' );
     my $genm = $selGenomes[0];
     $genm =~ /^genome_checkbox_(\d+\.\d+)/;
     $self->{ 'colorsimsgenome' } = $1;
   }
   elsif ( defined( $self->{ 'cgi' }->param( 'buttonpressed' ) ) && $self->{ 'cgi' }->param( 'buttonpressed' ) eq 'ColorPidentButton' ) {
-    my @selGenomes = $self->{ 'cgi' }->param( 'genome_checkbox' );
+    my @selGenomes = $self->{ 'cgi' }->multi_param( 'genome_checkbox' );
     my $genm = $selGenomes[0];
     $genm =~ /^genome_checkbox_(\d+\.\d+)/;
     $self->{ 'colorpidentgenome' } = $1;
@@ -326,7 +326,7 @@ sub output {
   }
   elsif ( defined( $self->{ 'cgi' }->param( 'buttonpressed' ) ) && $self->{ 'cgi' }->param( 'buttonpressed' ) eq 'SAVEEMPTYCELLS' ) {
     $self->{ 'cgi' }->param( 'SHOWEMPTYCELLS', 1 );
-    my @allbuttons = $self->{ 'cgi' }->param( 'EMPTYCELLHIDDENS' );
+    my @allbuttons = $self->{ 'cgi' }->multi_param( 'EMPTYCELLHIDDENS' );
 
     my $emptycellsvalues = $subsystem->get_emptycells();
 
@@ -484,13 +484,13 @@ sub load_subsystem_spreadsheet {
   # Displaying and Collapsing Subsets
   my @collection_set = ( 'All' );
   if ( defined( $self->{ 'cgi' }->param( 'collection_set' ) ) ) {
-    @collection_set = $self->{ 'cgi' }->param( 'collection_set' );
+    @collection_set = $self->{ 'cgi' }->multi_param( 'collection_set' );
   }
   my %collset = map { $_ => 1 } @collection_set;
 
   my @uncollapse_set = ( 'None' );
   if ( defined( $self->{ 'cgi' }->param( 'uncollapse_set' ) ) ) {
-    @uncollapse_set = $self->{ 'cgi' }->param( 'uncollapse_set' );
+    @uncollapse_set = $self->{ 'cgi' }->multi_param( 'uncollapse_set' );
   }
   my %uncollapse = map { $_ => 1 } @uncollapse_set;
 
@@ -2279,7 +2279,7 @@ sub setCGIParameter {
 
   if ( defined( $self->{ 'cgi' }->param( $paramname ) ) ) {
     if ( $isarray ) {
-      my @pp = $self->{ 'cgi' }->param( $paramname );
+      my @pp = $self->{ 'cgi' }->multi_param( $paramname );
       $p = join( ',##,', @pp );
     }
     else {
