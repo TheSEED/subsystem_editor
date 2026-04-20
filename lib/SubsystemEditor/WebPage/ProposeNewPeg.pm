@@ -105,7 +105,7 @@ sub output {
 	$self->{seeduser} = $user->login;
     }
 
-    $self->{ 'seeduser' } = $user;
+    # $self->{ 'seeduser' } = $user;
     $self->{ 'fig' }->set_user( $self->{ 'seeduser' } );
   }
 
@@ -115,7 +115,7 @@ sub output {
   #  What is the current set of allowed start codons?
   #---------------------------------------------------------------------------
   
-  my @is_start = $self->{ 'cgi' }->param('is_start');
+  my @is_start = $self->{ 'cgi' }->multi_param('is_start');
   ( @is_start > 0 ) or ( @is_start = qw( ATG GTG TTG ) );
   my %is_start = map { $_ => 1 } @is_start;
   
@@ -126,7 +126,7 @@ sub output {
   my %gencode = map { $_ => $gjoseqlib::genetic_code{ $_ } }
     keys %gjoseqlib::genetic_code;
   
-  foreach ( $self->{ 'cgi' }->param('code_opts') ) {
+  foreach ( $self->{ 'cgi' }->multi_param('code_opts') ) {
     my ( $codon, $aa ) = split /\./;
     $gencode{ $codon } = $aa;
   }
