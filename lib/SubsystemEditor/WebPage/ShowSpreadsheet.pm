@@ -402,7 +402,11 @@ sub output {
   # add hidden parameter for the tab that is actually open #
   my $dth = 0;
   if ( defined( $self->{ 'cgi' }->param( 'defaulttabhidden' ) ) ) {
-    $dth = $self->{ 'cgi' }->param( 'defaulttabhidden' );
+    # Validate input is a non-negative integer to prevent XSS (TIKI-W094-V3-25)
+    my $param_val = $self->{ 'cgi' }->param( 'defaulttabhidden' );
+    if ( $param_val =~ /^\d+$/ ) {
+      $dth = $param_val;
+    }
   }
 
   $hiddenvalues->{ 'subsystem' } = $name;
@@ -427,7 +431,13 @@ sub output {
   $tab_view_component->add_tab( '<H2>&nbsp; Show Variants &nbsp;</H2>', "$variantpanel" );
 
   if ( defined( $self->{ 'cgi' }->param( 'defaulttabhidden' ) ) ) {
-    $tab_view_component->default( $self->{ 'cgi' }->param( 'defaulttabhidden' ) );
+    # Validate input is a non-negative integer to prevent XSS (TIKI-W094-V3-25)
+    my $param_val = $self->{ 'cgi' }->param( 'defaulttabhidden' );
+    if ( $param_val =~ /^\d+$/ ) {
+      $tab_view_component->default( $param_val );
+    } else {
+      $tab_view_component->default( 0 );
+    }
   }
   else {
     $tab_view_component->default( 0 );

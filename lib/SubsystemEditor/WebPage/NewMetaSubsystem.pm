@@ -219,7 +219,11 @@ sub output {
   my $dth = 0;
 
   if ( defined( $cgi->param( 'defaulttabhidden' ) ) ) {
-    $dth = $cgi->param( 'defaulttabhidden' );
+    # Validate input is a non-negative integer to prevent XSS (TIKI-W094-V3-25)
+    my $param_val = $cgi->param( 'defaulttabhidden' );
+    if ( $param_val =~ /^\d+$/ ) {
+      $dth = $param_val;
+    }
   }
 
   $hiddenvalues->{ 'buttonpressed' } = 'none';
