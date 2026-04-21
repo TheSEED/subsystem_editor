@@ -1,6 +1,7 @@
 use strict;
 use warnings;
 
+use Tracer;
 use FIG_Config;
 use lib "$FIG_Config::fig_disk/dist/current/$FIG_Config::arch/lib/WebApplication";
 use lib "$FIG_Config::common_runtime/lib/SubsystemEditor";
@@ -62,10 +63,11 @@ if ($have_fcgi && ! $ENV{REQUEST_METHOD})
 	    
 	    print CGI::header();
 	    print CGI::start_html();
-	    
-	    # print out the error
-	    print '<pre>'.$error.'</pre>';
-	    
+
+	    # Log the full error for debugging but don't expose to user
+	    warn "ERROR: $error";
+	    print '<pre>An internal error occurred. Please try again later.</pre>';
+
 	    print CGI::end_html();
 	}
     }
@@ -83,10 +85,11 @@ else
 	
 	print CGI::header();
 	print CGI::start_html();
-	
-	# print out the error
-	print '<pre>'.$error.'</pre>';
-	
+
+	# Log the full error for debugging but don't expose to user
+	warn "ERROR: $error";
+	print '<pre>An internal error occurred. Please try again later.</pre>';
+
 	print CGI::end_html();
     }
 }
