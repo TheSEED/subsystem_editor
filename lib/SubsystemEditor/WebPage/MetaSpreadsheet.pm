@@ -271,7 +271,7 @@ sub output {
   # Content #
   ###########
 
-  my $content = "<H1>Subsystem Metaview for $ssname</H1>";
+  my $content = "<H1>Subsystem Metaview for ".CGI::escapeHTML( $ssname )."</H1>";
 
   if ( defined( $comment ) && $comment ne '' ) {
     my $info_component = $application->component( 'CommentInfo' );

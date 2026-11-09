@@ -207,12 +207,12 @@ sub output {
   ###########
   
   if ( !$self->{ 'can_alter' } ) {
-    my $content = "<H1>Subsets for $ssname</H1>";
+    my $content = "<H1>Subsets for ".CGI::escapeHTML( $ssname )."</H1>";
     $content .= "You do not have the right to edit the subsets of this metagenome";
     return $content;
   }
 
-  my $content = "<H1>Subsets for $ssname</H1>";
+  my $content = "<H1>Subsets for ".CGI::escapeHTML( $ssname )."</H1>";
 
 
   ####################

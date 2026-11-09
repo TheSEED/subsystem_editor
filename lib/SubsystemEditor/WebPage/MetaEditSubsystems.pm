@@ -76,7 +76,7 @@ sub output {
   $self->{ 'metasubsystem' } = new MetaSubsystem( $name, $self->{ 'fig' }, 0 );
   if ( !defined( $self->{ 'metasubsystem' } ) ) {
     my $content = '<H1>Add / Remove Subsystems</H1>';
-    $content .= "Subsystem $ssname does not exist!";
+    $content .= "Subsystem ".CGI::escapeHTML( $ssname )." does not exist!";
     return $content;
   }
 
@@ -179,7 +179,7 @@ sub output {
   my $choose = $self->choose_subsystems();
   my $remove = $self->remove_subsystems();
 
-  my $content = "<H1>Add / Remove Subsystems $ssname</H1>";
+  my $content = "<H1>Add / Remove Subsystems ".CGI::escapeHTML( $ssname )."</H1>";
   $content .= '<H2>Choose Subsystems to Add to the MetaSubsystem</H2>';
   $content .= $self->start_form( 'form', { metasubsystem => $name } );
   $content .= $choose;
