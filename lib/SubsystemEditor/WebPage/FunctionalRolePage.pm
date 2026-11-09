@@ -416,7 +416,7 @@ sub output {
   #############################
 
 
-  my $content = "<H1>Functional role page for $role</H2>";
+  my $content = "<H1>Functional role page for ".CGI::escapeHTML( $role )."</H2>";
 
   $hiddenvalues->{ 'fr' } = $role;
   $content .= $self->start_form( 'functionalrole', $hiddenvalues );
